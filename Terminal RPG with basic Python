@@ -1,0 +1,312 @@
+# TERMINAL ADVENTURE (RPG GAME)
+
+
+while True: #This is a videogame so it does not make sense to restart the code when you finish. This is the reason why I'am using a loop 
+    
+
+
+  #The first step will be a front page for our mini RPG GAME
+ print("###################################################################")
+ print("##                                                               ##")
+ print("##                                                               ##")
+ print("##                                                               ##")
+ print("##                                                               ##")
+ print("##                     ----A DREAM QUEST----                     ##")
+ print("##                                                               ##")
+ print("##                                                               ##")
+ print("##                                                               ##")
+ print("##                                                               ##")
+ print("##                                           by: reicoildo       ##")
+ print("###################################################################")
+ print()
+ start =(input("           press enter or any key + enter to start         ")) #Im like ubisoft, no configuration just start 🗿
+ 
+ print() #This "empty" prints are here to make a separation between the front page and the text
+ print()
+
+
+ import time #I read that with this module you can stablish some time between prints
+ time.sleep(3)
+
+
+
+ #A RPG needs a name input and a class selector
+
+
+ user1 = input("What is your name dear dreamer?: ")
+
+
+ #Now we need a little bit of context for our story, I´m going to use a narrator
+
+
+ time.sleep(1)
+
+ print("Well,", user1, "...")
+ time.sleep(1.5) #the time is in seconds
+ print("Your body is asleep but in this reality you are going to need to be become someone so...")
+ time.sleep(1)
+ print("choose a class of dreamer, you have three families:")
+ time.sleep(1.5)
+ print("1) Nightmare Reaper: Not too much health but high damage")
+ print("2) Dream Wanderer: decent amount of health and decent amount of damage")
+ print("3) Sleepy Tank: A lot of health but not too much damage")
+ time.sleep(1)
+
+
+ #I'm going to define some variables with the name of the classes so I can play with them along the code
+
+
+ Sleepy_Tank = "Sleepy Tank"
+ Dream_Wanderer = "Dream Wanderer"
+ Nightmare_reaper = "Nightmare Reaper"
+
+ family = int(input("Tell me the number of your new family: "))
+
+
+ #we need to look for a way to limit the options of the player to only numbers betweeen 1 and 3.
+
+
+ while family not in [1, 2, 3]:
+    family = int(input(f"what are you saying {user1}? You only have those three options, repeat: "))
+
+
+
+ #we are going to have two stats, health and damage so it will be necessary to define them with a basic number
+
+
+ maxhealth = 0
+ health = 0 #I had to define two different kinds of health because one will be the max health that the user can have and the other the one who will be going down and up during the combat
+ damage = 0
+
+
+  # we are going to use conditionals for the classes a.k.a families
+
+
+ if family == 3:
+    print(f"So you are going to be {user1} the {Sleepy_Tank}!")
+    maxhealth += 20
+    health += 20
+    damage += 3
+    user2 = f"{user1} + {Sleepy_Tank}"
+ elif family == 2:
+    print(f"So you are going to be {user1} the Dream Wanderer!")
+    maxhealth += 15
+    health += 15
+    damage += 5
+    user2 = f"{user1} the {Dream_Wanderer}"
+ else:
+    print(f"So you are going to be {user1} the Nightmare Reaper!")
+    maxhealth += 10
+    health += 10
+    damage += 7
+    user2 = f"{user1} the {Nightmare_reaper}"
+
+
+ #This name modification is just for the text and part of the story, probably it will be necesary if we are trying to safe some memory
+
+
+ time.sleep(2)
+ print(f"You are {user2}! with a damage of {damage} and {maxhealth} of health") #This is more to check if the code is working than something necesary in the game
+ time.sleep(1)
+ first_decision = input(f"Are you ready to fight to wake up {user2}?: ")
+
+ while first_decision.lower() != "yes": #another loop to make the user choose the answer that I want. hte .lower is to receive any kind of yes like YES or Yes and keep working
+    first_decision = input("Don't be a coward! Come on, say yes: ")
+ print("That's the actitude of a real dreamer! Let the dream begin!")
+ time.sleep(4)
+
+
+ #This is a simple game, so it will have only one combat:
+ 
+
+ print(f"Well {user2}, to wake up and become only {user1} again, you will need to fight The Nightmare of the Void or the Nightmare of the Rage")
+ time.sleep(1)
+ endnightmare = input("So, What is your biggest negative emotion, Void or Rage?: ").lower()
+
+
+ #I need to use another loop to protect the decisions
+
+
+ while endnightmare not in ["void", "rage"]:
+    endnightmare = input("Don't be silly, Void or Rage, nothing less, nothing more: ").lower()
+ 
+ #print(endnightmare)
+ time.sleep(3)
+
+
+ #I know that in this level of the course we haven't seen functions but, I investigated for myself and I found out that if I wanted to have two different bosses I will have to use them
+
+
+ #This new variables are general for both functions
+ heal = 2
+ block = float(1)
+
+ #first function boosfight = void variables
+ voidhealth = 30
+ voidmaxhealth = 30
+ voiddamage = 2
+ 
+ import random 
+
+ def nightmareisvoid(health, voidhealth):
+    block = 1
+    print(f"Be careful {user2}, now you are fighting against the Nightmare of the Void")
+    time.sleep(2)
+    while health > 0 and voidhealth > 0:
+        print(f"Your health if {health}, Nightmare of the Void's health is {voidhealth}")
+
+
+        #Users turn
+
+
+        action = int(input("1) Attack 2) Block 3) heal"))
+
+        if action == 1:
+          print("ATTACK!")
+          voidhealth -= damage * block
+    
+        elif action == 2:
+          print("You are getting ready to block the next attack")
+          block = float(0.5)
+
+        elif action ==3:
+          if health == maxhealth:
+             action =int(input("You already have Max Health choose another action: ")) #this is to limit the heal to the maxhealth
+          else:
+             health += heal
+          print(f"now your health is {health}")
+        
+        else:
+           print("You lost your turn for not doing anything useful!")
+
+     
+        #Enemy's turn
+        time.sleep(2)
+
+        enemyaction = int(random.randint(1, 3)) #The random.randint will determinate the actions of the enemy 
+     
+        if enemyaction == 1:
+           print("THE NIGHTMARE OF THE VOID ATTACKS!")
+           health -= voiddamage
+    
+        elif enemyaction == 2:
+           print("You are getting ready to block the next attack")
+
+        elif enemyaction ==3:
+           if voidhealth == voidmaxhealth:
+              enemyaction = int(random.randint(1, 2)) 
+           else:
+              voidhealth += heal
+              print(f"now the Nightmare of void has a health of {voidhealth}")
+
+
+
+        #endgame messages
+        if health <= 0:
+           print("You've been defeated by the Nightmare of Void... GAME OVER")
+           time.sleep(5)
+
+        elif voidhealth <= 0:
+           print("YOU HAVE DEFEATED THE NIGHTMARE!!")
+
+           time.sleep(3)
+           print(f"Wake up {user1}... goodbye")
+           time.sleep(6) 
+ 
+
+ #Now it's time to define the function for the other boss fight "Rage" but first, the variables 
+
+
+ ragehealth = 20
+ ragemaxhealth = 20
+ ragedamage = 3
+
+ #The functions
+
+
+ def nightmareisrage(health, ragehealth):
+    block = 1
+    print(f"Be careful {user2}, now you are fighting against the Nightmare of the Rage")
+    time.sleep(2)
+    while health > 0 and ragehealth > 0:
+        print(f"Your health if {health}, Nightmare of the Rage's health is {ragehealth}")
+
+
+        #Users turn
+
+
+        action = int(input("1) Attack 2) Block 3) heal: "))
+
+        if action == 1:
+          print("ATTACK!")
+          ragehealth -= damage * block
+    
+        elif action == 2:
+          print("You are getting ready to block the next attack")
+          block = float(0.5)
+
+        elif action ==3:
+          if health == maxhealth:
+             action =int(input("You already have Max Health choose another action: ")) #this is to limit the heal to the maxhealth
+          else:
+             health += heal
+          print(f"now your health is {health}")
+        
+        else:
+           print("You lost your turn for not doing anything useful!")
+
+     
+        #Enemy's turn
+        time.sleep(2)
+
+        enemyaction = int(random.randint(1, 3)) #The random.randint will determinate the actions of the enemy 
+     
+        if enemyaction == 1:
+           print("THE NIGHTMARE OF THE RAGE ATTACKS!")
+           health -= ragedamage * block
+    
+        elif enemyaction == 2:
+           print("The nightmare is getting ready to block the next attack")
+
+        elif enemyaction ==3:
+           if ragehealth == ragemaxhealth:
+              enemyaction = int(random.randint(1, 2)) 
+           else:
+              ragehealth += heal
+              print(f"The nightmare heals itself, now the Nightmare of void has a health of {ragehealth}")
+
+
+
+        #endgame messages
+        if health <= 0:
+           print("You've been defeated by the Nightmare of Rage... GAME OVER")
+
+        elif ragehealth <= 0:
+           print("YOU HAVE DEFEATED THE NIGHTMARE!!")
+
+           time.sleep(3)
+           print(f"Wake up {user1}... goodbye")
+           time.sleep(6) 
+
+
+ #Now let's use conditionals to choose the boss fight          
+  
+
+ if endnightmare == "void":
+     nightmareisvoid(health, voidhealth)
+
+ elif endnightmare == "rage":
+     nightmareisrage(health, ragehealth)
+
+
+     #Note: I don't understand why some variables from outside the functions works into them and others don't.
+ 
+
+
+       
+
+
+       
+
+ 
+
